@@ -9,27 +9,25 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-@Document(collection = "users")
+@Document(collection = "themes")
 @Getter
 @Setter
 @ToString
-public class UserEntity {
+public class ThemeEntity {
     @Id
     private String id;
-    private String userName;
-    private String userEmail;
-    private String userPassword;
+    private String themeName;
     @CreatedDate
-    private Date insertTimestamp;
+    private LocalDateTime insertTimestamp;
     @LastModifiedDate
-    private Date updateTimestamp;
+    private LocalDateTime updateTimestamp;
 
-    public UserEntity(String userName, String userEmail, String userPassword) {
+    public ThemeEntity(String themeName) {
         super();
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
+        this.themeName = themeName;
     }
+
 }

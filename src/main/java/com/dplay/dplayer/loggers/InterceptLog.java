@@ -1,6 +1,6 @@
 package com.dplay.dplayer.loggers;
 
-import com.dplay.dplayer.service.logger.LoggingService;
+import com.dplay.dplayer.utils.logger.LoggingService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

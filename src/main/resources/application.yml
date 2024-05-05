@@ -12,6 +12,12 @@ spring:
       authentication-database: admin
       uri: mongodb://localhost:27017/dplayer
 
+default:
+  pageNo: 0
+  pageSize: 5
+  direction: DESC
+  entity: UPDATE_TIME_STAMP
+
 logging:
   level:
     web: debug

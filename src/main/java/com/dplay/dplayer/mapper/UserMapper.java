@@ -8,8 +8,8 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface UserMapper {
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "userName", target = "userName")
     @Mapping(source = "userEmail", target = "userEmail")
     @Mapping(source = "userPassword", target = "userPassword")

@@ -1,4 +1,4 @@
-package com.dplay.dplayer.service.impl;
+package com.dplay.dplayer.service.serviceimpl;
 
 import com.dplay.dplayer.dto.UserDTO;
 import com.dplay.dplayer.entity.UserEntity;
@@ -7,10 +7,9 @@ import com.dplay.dplayer.repository.UserRepository;
 import com.dplay.dplayer.service.UserService;
 import com.dplay.dplayer.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +22,14 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     UserRepository userRepository;
 
-    UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+    @Autowired
+    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
     }
 
     private HttpHeaders getHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        return headers;
+        return new HttpHeaders();
     }
 
     @Override
@@ -43,7 +41,7 @@ public class UserServiceImpl implements UserService {
         if(user.isEmpty() || Boolean.FALSE.equals(CommonUtils.validatePassword(user.get().getUserPassword(), userEntity.getUserPassword()))) {
             return new ResponseEntity<>("Invalid User Email/Password", getHeaders(), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(user.get().getUserId(), getHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(user.get().getId(), getHeaders(), HttpStatus.OK);
     }
 
     @Override
@@ -56,6 +54,6 @@ public class UserServiceImpl implements UserService {
         }
         userEntity.setUserPassword(CommonUtils.hashPassword(userEntity.getUserPassword()));
         userEntity = userRepository.save(userEntity);
-        return new ResponseEntity<>(userEntity.getUserId(), getHeaders(), HttpStatus.CREATED);
+        return new ResponseEntity<>(userEntity.getId(), getHeaders(), HttpStatus.CREATED);
     }
 }
